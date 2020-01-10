@@ -28,13 +28,26 @@ const promptManager = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ]).then(function({name,id,email,office}){
-        const manager = new Manager(name,id,email,office)
-
-
+    ]).then(function({name,id,email,office,choice}){
+        const manager = new Manager(name,id,email,office);
+        fs.appendFile("index.html",`<div class="card m-3" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h1>${manager.name}</h1>
+          <h2><i class="fas fa-mug-hot"></i> &nbsp; Manager</h2>
+        </div>
+        <div class="container bg-light col">
+              <ul class="list-group p-3">
+                  <li class="list-group-item">ID : ${manager.id}</li>
+                  <li class="list-group-item">Email : <a href="#"class="card-link">${manager.email}</a> </li>
+                  <li class="list-group-item">Office number: ${manager.office}</li>
+              </ul>
+              </div>
+        </div>`,function(err){
+            if(err) throw err
+        })
     })
 
-};
+}
 const promptEngineer = function(){
     return inquirer.prompt([
         {
@@ -61,6 +74,21 @@ const promptEngineer = function(){
         }
     ]).then(function({name,email,id,github}){
     const engineer = new Engineer(name,email,id,github)
+    fs.appendFile("index.html",`<div class="card m-3" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h1>${engineer.name}</h1>
+          <h2><i class="fas fa-glasses"></i> &nbsp; Engineer</h2>
+        </div>
+        <div class="container bg-light col">
+              <ul class="list-group p-3">
+                  <li class="list-group-item">ID : ${engineer.id}</li>
+                  <li class="list-group-item">Email : <a href="#"class="card-link">${engineer.github}</a> </li>
+              </ul>
+              </div>
+        </div>`,function(err){
+            if(err) throw err
+        })
+
     })
 }
 const promptIntern = function(){
@@ -95,31 +123,10 @@ const promptIntern = function(){
 
 console.log("Please Build your team!")
 promptManager().then(function({choice}){
-    while(choice!=="I dont want to add anymore team members"){
     if(choice === "Engineer"){
-        console.log(("-").repeat(50))
-        return promptEngineer().then(function({choice}){
-            if(choice === "Engineer"){
-                console.log(("-").repeat(50))
-                return promptEngineer()
-            }if(choice === "Intern"){
-                console.log(("-").repeat(50))
-                return promptIntern()
-            }
-        })
+        return promptEngineer()
     }
     if(choice =="Intern"){
-        console.log(("-").repeat(50))
-        return promptIntern().then(function({choice}){
-            if(choice === "Engineer"){
-                console.log(("-").repeat(50))
-                return promptEngineer()
-            }if(choice === "Intern"){
-                console.log(("-").repeat(50))
-                return promptIntern()
-            }
-        })
-
-    }
+       return promptIntern()
     }
 })
