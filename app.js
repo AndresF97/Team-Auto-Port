@@ -1,4 +1,9 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern")
+const Engineer = require("./lib/Engineer")
 const promptManager = function(){
     return inquirer.prompt([
         {
@@ -23,7 +28,11 @@ const promptManager = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ])
+    ]).then(function({name,id,email,office}){
+        const manager = new Manager(name,id,email,office)
+
+
+    })
 
 };
 const promptEngineer = function(){
@@ -50,8 +59,9 @@ const promptEngineer = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ])
-
+    ]).then(function({name,email,id,github}){
+    const engineer = new Engineer(name,email,id,github)
+    })
 }
 const promptIntern = function(){
     return inquirer.prompt([
@@ -77,12 +87,15 @@ const promptIntern = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ])
+    ]).then(function({name,id,email,school}){
+        const intern = new Intern(name,id,email,school)
+    })
 
 }
 
 console.log("Please Build your team!")
 promptManager().then(function({choice}){
+    while(choice!=="I dont want to add anymore team members"){
     if(choice === "Engineer"){
         console.log(("-").repeat(50))
         return promptEngineer().then(function({choice}){
@@ -107,5 +120,6 @@ promptManager().then(function({choice}){
             }
         })
 
+    }
     }
 })
