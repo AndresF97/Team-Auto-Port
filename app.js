@@ -4,6 +4,7 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
+var employees = []
 const promptManager = function(){
     return inquirer.prompt([
         {
@@ -25,29 +26,21 @@ const promptManager = function(){
         },{
             type:"list",
             message:"Which type of memeber would you like to add?",
-            choices:["Engineer","Intern","I dont want to add anymore team members"],
+            choices:[ "Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ]).then(function({name,id,email,office,choice}){
-        const manager = new Manager(name,id,email,office);
-        fs.appendFile("index.html",`<div class="card m-3" style="width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h1>${manager.name}</h1>
-          <h2><i class="fas fa-mug-hot"></i> &nbsp; Manager</h2>
-        </div>
-        <div class="container bg-light col">
-              <ul class="list-group p-3">
-                  <li class="list-group-item">ID : ${manager.id}</li>
-                  <li class="list-group-item">Email : <a href="#"class="card-link">${manager.email}</a> </li>
-                  <li class="list-group-item">Office number: ${manager.office}</li>
-              </ul>
-              </div>
-        </div>`,function(err){
-            if(err) throw err
-        })
-    })
+    ]).then(async function({name,id,email,office,choice}){
+        const manager = new Manager(name,id,email,office)
+        employees.push(manager)
+            if(choice === "Engineer"){
+                return promptEngineer()
+            }
+            if(choice ==="Intern"){
+               return promptIntern()
+            }
+         })
+        }
 
-}
 const promptEngineer = function(){
     return inquirer.prompt([
         {
@@ -72,24 +65,16 @@ const promptEngineer = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ]).then(function({name,email,id,github}){
-    const engineer = new Engineer(name,email,id,github)
-    fs.appendFile("index.html",`<div class="card m-3" style="width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h1>${engineer.name}</h1>
-          <h2><i class="fas fa-glasses"></i> &nbsp; Engineer</h2>
-        </div>
-        <div class="container bg-light col">
-              <ul class="list-group p-3">
-                  <li class="list-group-item">ID : ${engineer.id}</li>
-                  <li class="list-group-item">Email : <a href="#"class="card-link">${engineer.github}</a> </li>
-              </ul>
-              </div>
-        </div>`,function(err){
-            if(err) throw err
-        })
-
-    })
+    ]).then( async function({name,id,email,github,choice}){
+        const engineer = new Engineer(name,id,email,github)
+        employees.push(engineer)
+            if(choice === "Engineer"){
+                return promptEngineer()
+            }
+            if(choice ==="Intern"){
+               return promptIntern()
+            }
+         })
 }
 const promptIntern = function(){
     return inquirer.prompt([
@@ -115,18 +100,17 @@ const promptIntern = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ]).then(function({name,id,email,school}){
-        const intern = new Intern(name,id,email,school)
-    })
+    ]).then(async function({name,id,email,github,choice}){
+        const intern = new Intern(name,id,email,github)
+        employees.push(intern)
+            if(choice === "Engineer"){
+                return promptEngineer()
+            }
+            if(choice ==="Intern"){
+               return promptIntern()
+            }
+         })
 
 }
-
 console.log("Please Build your team!")
-promptManager().then(function({choice}){
-    if(choice === "Engineer"){
-        return promptEngineer()
-    }
-    if(choice =="Intern"){
-       return promptIntern()
-    }
-})
+promptManager()
