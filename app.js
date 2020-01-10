@@ -4,8 +4,8 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
-var employees = []
-const promptManager = function(){
+const employees = []
+const promptManager = async function(){
     return inquirer.prompt([
         {
             type:"input",
@@ -32,6 +32,8 @@ const promptManager = function(){
     ]).then(async function({name,id,email,office,choice}){
         const manager = new Manager(name,id,email,office)
         employees.push(manager)
+        console.log(employees)
+        console.log(("-").repeat())
             if(choice === "Engineer"){
                 return promptEngineer()
             }
@@ -68,6 +70,8 @@ const promptEngineer = function(){
     ]).then( async function({name,id,email,github,choice}){
         const engineer = new Engineer(name,id,email,github)
         employees.push(engineer)
+        console.log(employees)
+        console.log(("-").repeat())
             if(choice === "Engineer"){
                 return promptEngineer()
             }
@@ -103,6 +107,8 @@ const promptIntern = function(){
     ]).then(async function({name,id,email,github,choice}){
         const intern = new Intern(name,id,email,github)
         employees.push(intern)
+        console.log(employees)
+        console.log(("-").repeat())
             if(choice === "Engineer"){
                 return promptEngineer()
             }
