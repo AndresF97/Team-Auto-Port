@@ -6,8 +6,9 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
 const employees = []
-const htmlBody=``;
-let card_manager = ``;
+let htmlBody=``;
+let cardManager = ``;
+let cardEngineer = ``;
 const promptManager = async function(){
     return inquirer.prompt([
         {
@@ -34,7 +35,7 @@ const promptManager = async function(){
         }
     ]).then(async function({name,id,email,office,choice}){
         const manager = new Manager(name,id,email,office)
-        card_manager =`
+        cardManager =`
         <div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
           <h1>${manager.name}</h1>
@@ -85,7 +86,7 @@ const promptEngineer = function(){
         }
     ]).then( async function({name,id,email,github,choice}){
         const engineer = new Engineer(name,id,email,github)
-        const engineer_card = `<div class="card m-3" style="width: 18rem;">
+        cardEngineer = `<div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
           <h1>${engineer.name}</h1>
           <h2><i class="fas fa-laptop-code"></i> &nbsp;Engineer</h2>
@@ -169,6 +170,7 @@ console.log("Please Build your team!")
 
 // var htmlfoot = ``
 function generatehtml(){
+    htmlBody = htmlBody + cardManager+cardEngineer;
     var htmlHead = `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -177,7 +179,9 @@ function generatehtml(){
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
                 <title>Your A-Team!</title>
-            </head>`+htmlBody;
-    writeToFileASync("./output/index.html",htmlBody);
+            </head>
+            <body>`
+          htmlHead =  htmlHead + htmlBody
+    writeToFileASync("./output/index.html",htmlHead);
 
 }
