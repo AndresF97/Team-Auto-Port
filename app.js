@@ -9,6 +9,8 @@ const employees = []
 let htmlBody=``;
 let cardManager = ``;
 let cardEngineer = ``;
+let cardIntern =``;
+let htmlfoot = ``;
 const promptManager = async function(){
     return inquirer.prompt([
         {
@@ -47,6 +49,8 @@ const promptManager = async function(){
                   <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${manager.email}</a> </li>
                   <li class="list-group-item">Office number: ${manager.office}</li>
               </ul>
+              </div>
+            </div>
               `
         employees.push(manager)
         console.log(employees)
@@ -97,6 +101,8 @@ const promptEngineer = function(){
                   <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${engineer.email}</a> </li>
                   <li class="list-group-item">Github account: <a href="https://github.com/"class="card-link">${engineer.github}</a> </li>
               </ul>
+              </div>
+              </div>
               `
 
         employees.push(engineer)
@@ -136,17 +142,19 @@ const promptIntern = function(){
     ]).then(async function({name,id,email,github,choice}){
         const intern = new Intern(name,id,email,github)
         employees.push(intern)
-        const intern_card  =`<div class="card m-3" style="width: 18rem;">
+        cardIntern  =`<div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
           <h1>${intern.name}</h1>
-          <h2><i class="fas fa-laptop-code"></i> &nbsp;Intern</h2>
+          <h2><i class="fas fa-school"></i> &nbsp;Intern</h2>
         </div>
         <div class="container bg-light">
               <ul class="list-group p-3">
                   <li class="list-group-item">ID : ${intern.id}</li>
-                  <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${engineer.email}</a> </li>
-                  <li class="list-group-item">School: <a href="https://www.google.com/search?sxsrf=ACYBGNTZXX802ACAWNWCBEgK0prDTsDYqA%3A1578721229634&source=hp&ei=zV8ZXvenJM-4-gS0xLbABQ&q=${intern.school}s&oq=${intern.school}&gs_l=psy-ab.3..0i131j0l3j0i131j0j0i131j0j0i131j0.2096.3148..3471...2.0..0.80.383.5......0....1..gws-wiz.....10..35i362i39j35i39.6UWdr0Tunp4&ved=0ahUKEwi3wtvw6vrmAhVPnJ4KHTSiDVgQ4dUDCAg&uact=5"class="card-link">${engineer.github}</a> </li>
-              </ul>
+                  <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${intern.email}</a> </li>
+                  <li class="list-group-item">School: <a href="https://www.google.com/search?sxsrf=ACYBGNTZXX802ACAWNWCBEgK0prDTsDYqA%3A1578721229634&source=hp&ei=zV8ZXvenJM-4-gS0xLbABQ&q=${intern.school}s&oq=${intern.school}&gs_l=psy-ab.3..0i131j0l3j0i131j0j0i131j0j0i131j0.2096.3148..3471...2.0..0.80.383.5......0....1..gws-wiz.....10..35i362i39j35i39.6UWdr0Tunp4&ved=0ahUKEwi3wtvw6vrmAhVPnJ4KHTSiDVgQ4dUDCAg&uact=5"class="card-link">${intern.school}</a> </li>
+              </ul> 
+              </div>
+              </div>
               `
         console.log(("-").repeat())
             if(choice === "Engineer"){
@@ -170,7 +178,7 @@ console.log("Please Build your team!")
 
 // var htmlfoot = ``
 function generatehtml(){
-    htmlBody = htmlBody + cardManager+cardEngineer;
+    htmlBody = htmlBody + cardManager+cardEngineer+cardIntern;
     var htmlHead = `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -180,8 +188,14 @@ function generatehtml(){
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
                 <title>Your A-Team!</title>
             </head>
-            <body>`
-          htmlHead =  htmlHead + htmlBody
+            <body>
+            <h1 class="text-center bg-secondary text-white font-weight-bolder p-4">The A-Team <i class="fas fa-users"></i></h1>
+        <div class="container row p-5">`
+            htmlfoot=`<script src="app.js"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+          </body>
+          </html>`
+          htmlHead =  htmlHead + htmlBody+htmlfoot
     writeToFileASync("./output/index.html",htmlHead);
 
 }
