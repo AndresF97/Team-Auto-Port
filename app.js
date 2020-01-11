@@ -53,7 +53,6 @@ const promptManager = async function(){
             </div>
               `
         employees.push(manager)
-        console.log(employees)
         console.log(("-").repeat())
             if(choice === "Engineer"){
                 return promptEngineer()
@@ -191,10 +190,11 @@ function generatehtml(){
             <body>
             <h1 class="text-center bg-secondary text-white font-weight-bolder p-4">The A-Team <i class="fas fa-users"></i></h1>
         <div class="container row p-5">`
-            htmlfoot=`<script src="app.js"></script>
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-          </body>
-          </html>`
+            
+        htmlfoot=`<script src="app.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+                </body>
+                </html>`
           htmlHead =  htmlHead + htmlBody+htmlfoot
     writeToFileASync("./output/index.html",htmlHead);
 
