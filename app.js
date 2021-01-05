@@ -138,8 +138,9 @@ const promptIntern = function(){
             choices:["Engineer","Intern","I dont want to add anymore team members"],
             name:"choice"
         }
-    ]).then(async function({name,id,email,github,choice}){
-        const intern = new Intern(name,id,email,github)
+    ]).then(async function({name,id,email,school,choice}){
+        const intern = new Intern(name,id,email,school)
+        console.log(intern)
         employees.push(intern)
         cardIntern  =`<div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
@@ -150,7 +151,7 @@ const promptIntern = function(){
               <ul class="list-group p-3">
                   <li class="list-group-item">ID : ${intern.id}</li>
                   <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${intern.email}</a> </li>
-                  <li class="list-group-item">School: <a href="https://www.google.com/search?sxsrf=ACYBGNTZXX802ACAWNWCBEgK0prDTsDYqA%3A1578721229634&source=hp&ei=zV8ZXvenJM-4-gS0xLbABQ&q=${intern.school}s&oq=${intern.school}&gs_l=psy-ab.3..0i131j0l3j0i131j0j0i131j0j0i131j0.2096.3148..3471...2.0..0.80.383.5......0....1..gws-wiz.....10..35i362i39j35i39.6UWdr0Tunp4&ved=0ahUKEwi3wtvw6vrmAhVPnJ4KHTSiDVgQ4dUDCAg&uact=5"class="card-link">${intern.school}</a> </li>
+                  <li class="list-group-item">School: <a href="https://www.google.com/search?sxsrf=ACYBGNTZXX802ACAWNWCBEgK0prDTsDYqA%3A1578721229634&source=hp&ei=zV8ZXvenJM-4-gS0xLbABQ&q=${intern.school}s&oq=${intern.school}&gs_l=psy-ab.3..0i131j0l3j0i131j0j0i131j0j0i131j0.2096.3148..3471...2.0..0.80.383.5......0....1..gws-wiz.....10..35i362i39j35i39.6UWdr0Tunp4&ved=0ahUKEwi3wtvw6vrmAhVPnJ4KHTSiDVgQ4dUDCAg&uact=5" target="_blank"class="card-link">${intern.school}</a> </li>
               </ul> 
               </div>
               </div>
