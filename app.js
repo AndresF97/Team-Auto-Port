@@ -8,8 +8,8 @@ const Engineer = require("./lib/Engineer")
 const employees = []
 let htmlBody=``;
 let cardManager = ``;
-let cardEngineer = ``;
-let cardIntern =``;
+let cardEngineer = [];
+let cardIntern = [];
 let htmlfoot = ``;
 const promptManager = async function(){
     return inquirer.prompt([
@@ -37,7 +37,7 @@ const promptManager = async function(){
         }
     ]).then(async function({name,id,email,office,choice}){
         const manager = new Manager(name,id,email,office)
-        cardManager =`
+        cardManager = `
         <div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
           <h1>${manager.name}</h1>
@@ -89,7 +89,7 @@ const promptEngineer = function(){
         }
     ]).then( async function({name,id,email,github,choice}){
         const engineer = new Engineer(name,id,email,github)
-        cardEngineer = `<div class="card m-3" style="width: 18rem;">
+        cardEngineer.push(`<div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
           <h1>${engineer.name}</h1>
           <h2><i class="fas fa-laptop-code"></i> &nbsp;Engineer</h2>
@@ -98,11 +98,11 @@ const promptEngineer = function(){
               <ul class="list-group p-3">
                   <li class="list-group-item">ID : ${engineer.id}</li>
                   <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${engineer.email}</a> </li>
-                  <li class="list-group-item">Github account: <a href="https://github.com/"class="card-link">${engineer.github}</a> </li>
+                  <li class="list-group-item">Github account: <a target="_blank" href="https://github.com/${engineer.github}"class="card-link">${engineer.github}</a> </li>
               </ul>
               </div>
               </div>
-              `
+              `)
 
         employees.push(engineer)
         console.log(("-").repeat())
@@ -142,7 +142,7 @@ const promptIntern = function(){
         const intern = new Intern(name,id,email,school)
         console.log(intern)
         employees.push(intern)
-        cardIntern  =`<div class="card m-3" style="width: 18rem;">
+        cardIntern.push(`<div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
           <h1>${intern.name}</h1>
           <h2><i class="fas fa-school"></i> &nbsp;Intern</h2>
@@ -151,11 +151,11 @@ const promptIntern = function(){
               <ul class="list-group p-3">
                   <li class="list-group-item">ID : ${intern.id}</li>
                   <li class="list-group-item">Email : <a href="https://mail.google.com/"class="card-link">${intern.email}</a> </li>
-                  <li class="list-group-item">School: <a href="https://www.google.com/search?sxsrf=ACYBGNTZXX802ACAWNWCBEgK0prDTsDYqA%3A1578721229634&source=hp&ei=zV8ZXvenJM-4-gS0xLbABQ&q=${intern.school}s&oq=${intern.school}&gs_l=psy-ab.3..0i131j0l3j0i131j0j0i131j0j0i131j0.2096.3148..3471...2.0..0.80.383.5......0....1..gws-wiz.....10..35i362i39j35i39.6UWdr0Tunp4&ved=0ahUKEwi3wtvw6vrmAhVPnJ4KHTSiDVgQ4dUDCAg&uact=5" target="_blank"class="card-link">${intern.school}</a> </li>
+                  <li class="list-group-item">School: <a href="https://www.google.com/search?sxsrf=ACYBGNTZXX802ACAWNWCBEgK0prDTsDYqA%3A1578721229634&source=hp&ei=zV8ZXvenJM-4-gS0xLbABQ&q=${intern.school}&oq=${intern.school}&gs_l=psy-ab.3..0i131j0l3j0i131j0j0i131j0j0i131j0.2096.3148..3471...2.0..0.80.383.5......0....1..gws-wiz.....10..35i362i39j35i39.6UWdr0Tunp4&ved=0ahUKEwi3wtvw6vrmAhVPnJ4KHTSiDVgQ4dUDCAg&uact=5" target="_blank"class="card-link">${intern.school}</a> </li>
               </ul> 
               </div>
               </div>
-              `
+              `)
         console.log(("-").repeat())
             if(choice === "Engineer"){
                 return promptEngineer()
