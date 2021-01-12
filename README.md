@@ -1,26 +1,23 @@
-# Team-Auto-Port
-- This app allows you; to enter infromation about your coworker (email,phone number, github account and position. With that info it should return a html file with information of each employee. 
+# Team Auto Portfolio
+## Summary 
+- This app allows you; to enter infromation about your newly higher team (email,phone number, github account and position). With that info it should return a html file with information of each employee. 
 ## Site Picture
-![ Team Auto Port](https://media-exp1.licdn.com/dms/image/C4E22AQGkhNXCSPPmFw/feedshare-shrink_800/0?e=1581552000&v=beta&t=3mxZzDyOpISasWvBFWlsCHopemH3N48Tz_rQB-e50t0)
+![ Team Auto Port](./assets/img/JestApp.gif)
 
 
 ## Technologies Used
-- HTML - used to create elements on the DOM
-- CSS - styles html elements on page
-- Bootstrap - Used to create cosmitics of the website and Media inquries
-- FontAwesome - used to add nice looking icons 
-- Git - version control system to track changes to source code
-- GitHub - hosts repository that can be deployed to GitHub Pages
-- Inquirer - An npm extension to get information from user
-- Axios -An npm to fetch data about the user from Github 
-
-## Summary 
-- This App will allow you to render a list for a team you've gather by getting the info from user in CLI.
+- HTML - used to create elements on the DOM.
+- CSS - styles html elements on page.
+- Bootstrap - Used to create cosmitics of the website and Media inquries.
+- FontAwesome - used to add nice looking icons.
+- Git - version control system to track changes to source code.
+- GitHub - hosts repository.
+- Inquirer - An npm extension to get information from user.
+- Jest - Used to test javascript classes and method.
+- NodeJS - Used for package managment and execute Javascript code in the CLI.
+- ES6 - SUed to build prompts, functions and classes.  
 ## Code Snippet
-```html
-<html>
-<body>
- <script>
+```javascript
     const promptEngineer = function(){
     return inquirer.prompt([
         {
@@ -72,10 +69,9 @@
             }
          })
 }
-     </script>
-</body>
-</html>
 ```
 - This code get the infromaition from the user and makes a card according to the user's info it will keep on asking the user for there input until they want to quit.
-[LinkedIn](linkedin.com/in/andres-felipe-jimenez-ferreira-b67a35192)
-[GitHub](https://github.com/AndresF97)
+## Auhtors
+- [LinkedIn](linkedin.com/in/andres-felipe-jimenez-ferreira-b67a35192)
+- [GitHub](https://github.com/AndresF97)
+- [Portfolio](https://andresf97.github.io/PortfolioUpdate/public/index.html)

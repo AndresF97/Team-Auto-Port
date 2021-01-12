@@ -140,7 +140,6 @@ const promptIntern = function(){
         }
     ]).then(async function({name,id,email,school,choice}){
         const intern = new Intern(name,id,email,school)
-        console.log(intern)
         employees.push(intern)
         cardIntern.push(`<div class="card m-3" style="width: 18rem;">
         <div class="card-header bg-primary text-white">
