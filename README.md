@@ -15,8 +15,10 @@
 - Inquirer - An npm extension to get information from user.
 - Jest - Used to test javascript classes and method.
 - NodeJS - Used for package managment and execute Javascript code in the CLI.
-- ES6 - SUed to build prompts, functions and classes.  
+- ES6 - Used to build prompts, functions and classes.  
+
 ## Code Snippet
+- This code get the informaition from the user and makes a card according to the user's info it will keep on asking the user for there input until they want to quit or add more information. Due to having the information from the prompt running first; I used an sync function to run pass that information through the HTML template. 
 ```javascript
     const promptEngineer = function(){
     return inquirer.prompt([
@@ -70,7 +72,6 @@
          })
 }
 ```
-- This code get the infromaition from the user and makes a card according to the user's info it will keep on asking the user for there input until they want to quit.
 ## Auhtors
 - [LinkedIn](linkedin.com/in/andres-felipe-jimenez-ferreira-b67a35192)
 - [GitHub](https://github.com/AndresF97)
